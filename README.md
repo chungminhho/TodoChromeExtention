@@ -10,7 +10,6 @@ This includes :
 - Mochai/Chai/SinonJS for testing contentscripts
 - Grunt and Bower
 
-![http://www.slideshare.net/flrent/build-your-own-chrome-extension-with-angularjs](http://i.imgur.com/pFPXooZ.png)
 
 ## Get Started
 - Clone this repo
