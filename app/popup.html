@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app=TodoApp ng-csp data-ng-controller="TodoCtrl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- build:css popup.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="screen">
+    <link rel="stylesheet" href="bower_components/angular/angular-csp.css" type="screen">
+    <link rel="stylesheet" href="css/popup.css" type="screen">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- endbuild -->
+    <title data-ng-bind="title">Popup Extension</title>
+</head>
+
+<body>
+
+<div data-ng-cloak>
+    <div id="todoapp">
+        <header>
+            <h1>Todos</h1>
+
+            <div data-ng-show="typeText ==='all'">
+                <input id="new-todo" type="text" ng-model="todoText" size="30"
+                       placeholder="What needs to be done?" ng-keyup="addTodo()"/>
+            </div>
+
+        </header>
+
+        <section id="main" style="display: block;">
+            <div data-ng-if="isTodo()">
+                <input id="toggle-all" type="checkbox" ng-model="markAll" data-ng-click="toggleMarkAll()"/>
+                <label for="toggle-all">Mark all as complete</label>
+            </div>
+
+            <ul id="todo-list" class="unstyled">
+                <li ng-repeat="todo in todos.slice().reverse()" ng-dblclick="toggleEditMode()">
+                    <div class="view" ng-keyup="editTodo()">
+                        <input type="checkbox" ng-model="todo.done"/>
+                        <span class="done-{{todo.done}}" data-ng-bind="todo.text"></span>
+                        <span style="font-size: 12px; float: right; position: absolute; right: 0; margin-top: -10px;" data-ng-bind="todo.date | fromNow"></span>
+                    </div>
+                    <input class="edit" type="text" ng-model="todo.text" ng-keyup="editOnEnter(todo)"/>
+                </li>
+            </ul>
+        </section>
+        <footer style="display: block;">
+            <ul id="filters">
+                <li>
+                    <div class="todo-count">{{remaining()}} of {{todos.length}} remaining</div>
+                </li>
+                <li style="margin-left: 75px;" data-ng-click="type('all')">
+                    <a href ng-class="{selected: typeText=='all'}">All</a>
+                </li>
+                <li data-ng-click="type('completed')">
+                    <a href ng-class="{selected: typeText=='completed'}">Completed</a>
+                </li>
+                <li ng-click="clear()">
+                    <a id="clear-completed" data-ng-if="hasDone()">
+                        Clear <span>{{(todos.length - remaining())}} {{itemText()}}</span>.
+                    </a>
+                </li>
+            </ul>
+
+        </footer>
+    </div>
+
+</div>
+
+
+<!--<div>-->
+<!--<h1>Hey! {{welcomeMsg}}</h1>-->
+<!--<button class="btn btn-info" ng-click="contribute()">Contribute</button>-->
+<!--</div>-->
+
+<!-- build:js popup.js -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="scripts/app/modules/angular-underscore.min.js"></script>
+<script src="scripts/app/modules/ui-bootstrap-0.9.0.min.js"></script>
+<script src="moment.js"></script>
+<script src="scripts/app/app.js"></script>
+<script src="scripts/app/services/storage.js"></script>
+<script src="scripts/app/controllers/controllers.js"></script>
+<!-- endbuild -->
+</body>
+</html>

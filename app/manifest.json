@@ -1,0 +1,65 @@
+{
+    "name": "Todo",
+    "version": "0.2.0",
+    "manifest_version": 2,
+    "description": "__MSG_appDescription__",
+    "icons": {
+        "16": "images/icon-16.png",
+        "128": "images/icon-128.png"
+    },
+    "options_page": "options.html",
+    "default_locale": "en",
+    "background": {
+        "page": "background.html"
+    },
+
+    "browser_action": {
+        "name": "Add this to your todo list",
+        "default_icon": {
+            "19": "images/icon-19.png",
+            "38": "images/icon-38.png"
+        },
+        "default_title": "Todos",
+        "default_popup": "popup.html"
+    },
+    "externally_connectable": {
+        "matches": [
+        ]
+    },
+    "permissions": [
+        "http://*/*",
+        "https://*/*",
+        "contextMenus",
+        "storage",
+        "notifications",
+        "clipboardRead",
+        "clipboardWrite",
+        "tabs",
+        "contentSettings",
+        "<all_urls>"
+    ],
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "web_accessible_resources": [
+        "http://fonts.googleapis.com/",
+        "https://*.google-analytics.com/**/*",
+        "images/48.png"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "exclude_matches": [
+            ],
+            "css": [
+            ],
+            "js": [
+                "scripts/contentscript.js",
+                "scripts/page.js"
+            ],
+            "run_at": "document_end",
+            "all_frames": false
+        }
+    ]
+}
